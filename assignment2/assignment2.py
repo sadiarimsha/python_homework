@@ -173,7 +173,7 @@ def write_sorted_list():
         writer.writerow(minutes1["fields"])
         for row in converted_list:
             writer.writerow(row)
-            return converted_list
+    return converted_list
 
 final_minutes_list = write_sorted_list()
 print(final_minutes_list)
