@@ -5,11 +5,8 @@ print(hello())
 
 # Task 2
 def greet(name):
-    greeting = "Hello, " + name + "!"
-    return greeting
-result = greet("Sadia")
-print (result)
-
+    return f"Hello, {name}!"
+    
 # Task 3
 def calc (a, b, operation="multiply"):
     try:
