@@ -6,7 +6,9 @@ print(hello())
 # Task 2
 def greet(name):
     return f"Hello, {name}!"
-    
+result = greet("Sadia")
+print (result)
+
 # Task 3
 def calc (a, b, operation="multiply"):
     try:
