@@ -57,7 +57,6 @@ def first_name(row_number):
 def employee_find(employee_id):
     def employee_match(row):
         return int(row[employee_id_column]) == employee_id
-    
     matches=list(filter(employee_match, employees["rows"]))
     return matches
 
@@ -180,7 +179,7 @@ def write_sorted_list():
         writer.writerow(minutes1["fields"])
         for row in converted_list:
             writer.writerow(row)
-            return converted_list
+    return converted_list
 
 final_minutes_list = write_sorted_list()
 print(final_minutes_list)
