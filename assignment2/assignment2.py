@@ -1,6 +1,7 @@
 # Task 2
 
 import csv
+import traceback
 
 
 def read_employees():
