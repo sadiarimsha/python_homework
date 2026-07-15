@@ -20,10 +20,17 @@ def read_employees():
                 counter += 1
             employee_data["rows"] = rows
             return employee_data
-    except Exception as e:
-        print(e)
-        return None
-    
+    except Exception as e:     
+        trace_back = traceback.extract_tb(e.__traceback__)
+        stack_trace = list()
+        for trace in trace_back:
+            stack_trace.append(f'File : {trace[0]} , Line : {trace[1]}, Func.Name : {trace[2]}, Message : {trace[3]}')
+        print(f"Exception type: {type(e).__name__}")
+        message = str(e)
+        if message:
+            print(f"Exception message: {message}")
+        print(f"Stack trace: {stack_trace}")
+        exit()
 
 employees = read_employees()
 print(employees)

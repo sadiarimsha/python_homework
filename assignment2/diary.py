@@ -16,8 +16,6 @@ try:
             if user_input == "done for now":
                 break
 
-except KeyboardInterrupt:
-    print("\nAn exception occurred: KeyboardInterrupt") 
 except Exception as e:
     trace_back = traceback.extract_tb(e.__traceback__)
     stack_trace = list()
