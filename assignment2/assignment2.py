@@ -77,7 +77,12 @@ sort_by_last_name()
 # Task 8
 
 def employee_dict(row):
-    return dict(zip(employees["fields"][1:], row[1:]))
+    result = {}
+    for i, header in enumerate(employees["fields"]):
+        if header == "employee_id":
+            continue
+        result[header] = row[i]
+    return result
 
 an_employee = employee_dict(employees["rows"][0])
 print(an_employee)
