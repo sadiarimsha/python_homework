@@ -2,7 +2,6 @@
 
 import csv
 
-employees = ""
 
 def read_employees():
     employee_data = {}
