@@ -80,6 +80,6 @@ print(clean_data)
 clean_data['Hire Date'] = pd.to_datetime(clean_data['Hire Date'], format='mixed', errors='coerce')
 print(clean_data)
 
-clean_data['Name'] = clean_data['Name'].str.strip().str.upper()
+clean_data['Name'] = clean_data['Name'].str.strip()
 clean_data['Department'] = clean_data['Department'].str.strip().str.upper()
 print(clean_data)
