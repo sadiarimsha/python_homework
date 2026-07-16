@@ -60,33 +60,29 @@ print(dirty_data)
 
 clean_data = dirty_data.copy()
 
+for col in clean_data.select_dtypes(include='object').columns:
+    clean_data[col] = clean_data[col].str.strip()
+
 clean_data = clean_data.drop_duplicates()
 print(clean_data)
 
 clean_data['Age'] = pd.to_numeric(clean_data['Age'], errors='coerce')
 print(clean_data)
 
-clean_data['Salary'] = clean_data['Salary'].replace(['unknown', 'n/a'], pd.NA)
+clean_data['Salary'] = clean_data['Salary'].str.lower().replace(['unknown', 'n/a'], pd.NA)
 clean_data['Salary'] = pd.to_numeric(clean_data['Salary'], errors='coerce')
 print(clean_data)
 
 mean_age = clean_data['Age'].mean()
 median_salary = clean_data['Salary'].median()
-
 clean_data['Age'] = clean_data['Age'].fillna(mean_age)
-print(clean_data)
-
 clean_data['Salary'] = clean_data['Salary'].fillna(median_salary)
 print(clean_data)
 
-clean_data['Hire Date'] = pd.to_datetime(clean_data['Hire Date'], format='mixed', errors="coerce")
+clean_data['Hire Date'] = pd.to_datetime(clean_data['Hire Date'], format='mixed', errors='coerce')
 print(clean_data)
 
-clean_data['Name'] = clean_data['Name'].str.strip()
-clean_data['Department'] = clean_data['Department'].str.strip()
 clean_data['Name'] = clean_data['Name'].str.upper()
 clean_data['Department'] = clean_data['Department'].str.upper()
 print(clean_data)
-
-
 
