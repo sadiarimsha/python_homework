@@ -47,7 +47,7 @@ try:
                 subscriber_id INTEGER NOT NULL,
                 magazine_id INTEGER NOT NULL,
                 FOREIGN KEY (subscriber_id) REFERENCES subscribers (subscriber_id),
-                FOREIGN KEY (magazine_id) REFERENCES magazines (magazine_id)
+                FOREIGN KEY (magazine_id) REFERENCES magazines (magazine_id),
                 UNIQUE (subscriber_id, magazine_id)
             )
         """)
@@ -122,7 +122,7 @@ try:
                     (subscriber_id, magazine_id, expiration_date)
                 )
             except sqlite3.IntegrityError:
-                print(f"{subscriber-name} is already subscribed to {magazine_name}.")
+                print(f"{subscriber_name} is already subscribed to {magazine_name}.")
 
         add_publisher(cursor, 'NY Magazine')  
         add_publisher(cursor, 'Chicago Magazine')
@@ -161,7 +161,7 @@ try:
         for row in result:
             print(row)
 
-        cursor.execute("SELECT m.magazine_name, p.publisher_name FROM magazines AS m JOIN publishers AS p on m.publisher_id = p.publisher_id WHERE p.publisher_name = ?", ('NY Magazine,'))
+        cursor.execute("SELECT m.magazine_name, p.publisher_name FROM magazines AS m JOIN publishers AS p on m.publisher_id = p.publisher_id WHERE p.publisher_name = ?", ('NY Magazine',))
         result = cursor.fetchall()
         for row in result:
             print(row)
@@ -169,5 +169,5 @@ try:
 except sqlite3.Error as e:
     print(f"An error occurred: {e}")
 
-# Task 5
+
 
