@@ -13,9 +13,10 @@ df['total'] = df['quantity'] * df['price']
 print(df.head(5))
 
 result = df.groupby('product_id').agg({'line_item_id': 'count', 'total' : 'sum', 'product_name' : 'first'})
+result = result.reset_index()
 print(result.head(5))
 
 result= result.sort_values(by='product_name')
 print(result.head(5))
 
-result.to_csv('order_summary.csv', sep=',', index=True, header=True, encoding=None)
+result.to_csv('order_summary.csv', sep=',', index=False, header=True, encoding=None)

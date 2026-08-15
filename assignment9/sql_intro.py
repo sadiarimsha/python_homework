@@ -7,8 +7,6 @@ try:
         print("Database created and connected successfully.")
 except sqlite3.Error as e:
     print(f"An error occurred: {e}")
-finally:
-    conn.close()
 
 #Task 2
 
@@ -46,10 +44,11 @@ try:
             CREATE TABLE IF NOT EXISTS subscriptions (
                 subscription_id INTEGER PRIMARY KEY,
                 expiration_date TEXT NOT NULL,
-                subscriber_id INTEGER,
-                magazine_id INTEGER,
+                subscriber_id INTEGER NOT NULL,
+                magazine_id INTEGER NOT NULL,
                 FOREIGN KEY (subscriber_id) REFERENCES subscribers (subscriber_id),
                 FOREIGN KEY (magazine_id) REFERENCES magazines (magazine_id)
+                UNIQUE (subscriber_id, magazine_id)
             )
         """)
         print("Tables created successfully.")
@@ -117,18 +116,13 @@ try:
                 return
             magazine_id = result[0]
 
-            cursor.execute(
-                "SELECT * FROM subscriptions WHERE subscriber_id = ? AND magazine_id = ?",
-                (subscriber_id, magazine_id)
-            )
-            if len(cursor.fetchall()) > 0:
-                print(f"{subscriber_name} is already subscribed to {magazine_name}.")
-                return
-
-            cursor.execute(
-                "INSERT INTO subscriptions (subscriber_id, magazine_id, expiration_date) VALUES (?, ?, ?)",
-                (subscriber_id, magazine_id, expiration_date)
-            )
+            try:
+                cursor.execute(
+                    "INSERT INTO subscriptions (subscriber_id, magazine_id, expiration_date) VALUES (?, ?, ?)",
+                    (subscriber_id, magazine_id, expiration_date)
+                )
+            except sqlite3.IntegrityError:
+                print(f"{subscriber-name} is already subscribed to {magazine_name}.")
 
         add_publisher(cursor, 'NY Magazine')  
         add_publisher(cursor, 'Chicago Magazine')
@@ -167,7 +161,7 @@ try:
         for row in result:
             print(row)
 
-        cursor.execute("SELECT m.magazine_name, p.publisher_name FROM magazines AS m JOIN publishers AS p on m.publisher_id = p.publisher_id")
+        cursor.execute("SELECT m.magazine_name, p.publisher_name FROM magazines AS m JOIN publishers AS p on m.publisher_id = p.publisher_id WHERE p.publisher_name = ?", ('NY Magazine,'))
         result = cursor.fetchall()
         for row in result:
             print(row)
