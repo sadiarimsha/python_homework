@@ -1,0 +1,11 @@
+1) Which sections of the website are restricted for crawling?
+User specific pages, internal community pages are restricted for crawling.
+
+2) Are there specific rules for certain user agents?
+Some craawlers are asked to add a crawl delay.
+Some crawlers are completely blocked from scraping. 
+Rules are also made for everyone
+
+3) Reflect on why websites use robots.txt and write 2-3 sentences explaining its purpose and how it promotes ethical scraping
+Purpose of using robots.txt is to tell everyone which parts of their website web crawlers can access.
+It states various rules so web crawlers have some guidelines about what they can access vs what they cannot access.

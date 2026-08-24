@@ -1,0 +1,3 @@
+I had a hard time understanding the DOM tree while trying to get the correct tags and classes for the elements I needed to scrape.
+
+Kept reading and trying out different ways to scrape and it eventually worked.
