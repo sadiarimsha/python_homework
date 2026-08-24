@@ -1,0 +1,11 @@
+1) Which sections of the website are restricted for crawling?
+
+User specific pages and internal community pages are restricted from crawling. These include pages like deletion discussions, arbitration requests, and administrator noticeboards. These are mostly pages used by editors behind the scenes, not the actual articles meant for regular readers.
+
+2) Are there specific rules for certain user agents?
+
+Yes, the rules are different depending on the crawler. Some crawlers are asked to wait a few seconds between requests, so they don't overload the site. Other crawlers are completely blocked from accessing the site at all, usually because they caused problems before. There are also general rules that apply to everyone else, allowing normal browsing of articles while still keeping certain internal pages off limits.
+
+3) Reflect on why websites use robots.txt and write 2 to 3 sentences explaining its purpose and how it promotes ethical scraping
+
+Websites use robots.txt to tell web crawlers which parts of the site they are allowed to visit and which parts they should stay away from. This helps protect the site's servers, user privacy, and internal content that isn't meant for the public. It supports ethical scraping because it gives crawlers clear rules to follow before they start collecting data, instead of assuming that anything they can technically reach is okay to take.

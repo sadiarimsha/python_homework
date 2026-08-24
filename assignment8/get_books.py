@@ -1,6 +1,4 @@
 
-#Task 3
-
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
@@ -9,13 +7,17 @@ import pandas as pd
 import csv
 import json
 
+# Task 3
+# Loading the page
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
 driver.get("https://durhamcounty.bibliocommons.com/v2/search?query=learning%20spanish&searchType=smart")
 
+# Finding search result entries
 search_results = driver.find_elements(By.CSS_SELECTOR,'li.row.cp-search-result-item')
 if len(search_results) > 0:
     print(len(search_results))
 
+# Data scraping
 results = []
 
 for search in search_results:
@@ -34,11 +36,16 @@ for search in search_results:
     
     results.append(book)
 
+driver.quit()
+# Printing dataframe
 df = pd.DataFrame(results)
 print(df)
 
-# Task 4
+# Task 4 
+# Writing to CSV
+
 df.to_csv('get_books.csv', sep=',', index=False, header=True, encoding=None)
 
+# Writing to JSON
 with open('get_books.json', 'w') as json_file:
     json.dump(results, json_file, indent=4)
