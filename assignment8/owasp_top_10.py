@@ -5,10 +5,13 @@ from selenium.webdriver.common.by import By
 import pandas as pd
 
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-driver.get("https://owasp.org/Top10/2025/")
+driver.get("https://owasp.org/www-project-top-ten/")
 
-top_ten = driver.find_element(By.CSS_SELECTOR,'h3[id="top-102025-list"]')
+top_ten_link = driver.find_element(By.LINK_TEXT, 'OWASP Top Ten 2025')
+top_ten_url = top_ten_link.get_attribute('href')
+driver.get(top_ten_url)
 
+top_ten = driver.find_element(By.CSS_SELECTOR, 'h3[id = "top-102025-list"]')
 results = []
 
 sibling_div = top_ten.find_element(By.XPATH,'following-sibling::ol')
@@ -22,5 +25,7 @@ print(results)
 
 df = pd.DataFrame(results)
 print(df)
+
+driver.quit()
 
 df.to_csv('owasp_top_10.csv', sep=',', index=False, header=True, encoding=None)

@@ -1,3 +1,3 @@
-I had a hard time understanding the DOM tree while trying to get the correct tags and classes for the elements I needed to scrape.
+One of the biggest challenges was learning to read the DOM tree accurately enough to find the exact element holding the data I needed, rather than a nearby parent or sibling. Several times I grabbed a wrapper div or span instead of the actual title, author, or link element, which caused wrong data or errors. Right clicking on the visible text and using Inspect, then Copy outerHTML, helped me confirm the real tag and class before writing any code.
 
-Kept reading and trying out different ways to scrape and it eventually worked.
+Another challenge was the OWASP page, where the elements had no class names at all, so I had to switch from CSS selectors to XPath, anchoring on a heading id and navigating to nearby elements instead. I also found that the page named in the assignment didn't contain the data directly, it linked to another page, so I had to adjust my script to follow that link first.
