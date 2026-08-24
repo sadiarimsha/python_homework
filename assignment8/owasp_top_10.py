@@ -13,12 +13,12 @@ top_ten_url = top_ten_link.get_attribute('href')
 driver.get(top_ten_url)
 
 # Find the list of 10 vulnerabilities and collect title + link for each
-top_ten = driver.find_element(By.CSS_SELECTOR, 'h3[id = "top-102025-list"]')
+top_ten = driver.find_element(By.XPATH, '//h3[@id = "top-102025-list"]')
 results = []
 
 # Data scraping
 sibling_div = top_ten.find_element(By.XPATH,'following-sibling::ol')
-findings = sibling_div.find_elements(By.CSS_SELECTOR, 'a')
+findings = sibling_div.find_elements(By.XPATH, './/a')
 for find in findings:
     vulnerability = {}
     vulnerability['Title'] = find.text.strip()
