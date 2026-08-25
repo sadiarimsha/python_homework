@@ -1,0 +1,11 @@
+1) Which sections of the website are restricted for crawling?
+
+Several categories of pages are restricted. Internal community and moderation discussions are blocked, including Wikipedia:Articles_for_deletion, Wikipedia:Requests_for_arbitration, Wikipedia:Sockpuppet_investigations, and Wikipedia:Administrators'_noticeboard. Special utility pages under /wiki/Special: are also blocked, along with backend paths like /w/ and /api/ (though a few specific API endpoints, such as /w/load.php? and /api/rest_v1/?doc, are explicitly allowed as exceptions). User-related pages are restricted in some language versions too, such as /wiki/Käyttäjä: (Finnish for "User") and /wiki/Bruker: (Norwegian for "User"), likely to protect editor privacy.
+
+2) Are there specific rules for certain user agents?
+
+Yes, the file treats different bots very differently. Several specific bots, including MJ12bot, UbiCrawler, WebZIP, HTTrack, and wget, are completely blocked with Disallow: /, mostly because they've been observed scraping too aggressively or ignoring rate limits. SemrushBot is not blocked outright but is instead given a Crawl-delay: 5 instruction, asking it to wait 5 seconds between requests. A couple of bots, IsraBot and Orthogaffe, are explicitly allowed everywhere with no restrictions at all. The general User-agent: * rule, which applies to everyone not named individually, allows normal article browsing but blocks the internal/moderation pages listed above.
+
+3) Reflect on why websites use robots.txt and write 2 to 3 sentences explaining its purpose and how it promotes ethical scraping
+
+Websites use robots.txt to tell web crawlers which parts of the site they are allowed to visit and which parts they should stay away from. This helps protect the site's servers, user privacy, and internal content that isn't meant for the public. It supports ethical scraping because it gives crawlers clear rules to follow before they start collecting data, instead of assuming that anything they can technically reach is okay to take.
