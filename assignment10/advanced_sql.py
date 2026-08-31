@@ -70,6 +70,7 @@ try:
         product_id_value = cursor.fetchall()
 
         try:
+            # Begin transaction: order insert + all 5 line_item inserts as one unit of work
             cursor.execute(" INSERT INTO orders (customer_id, employee_id, date) VALUES ( ? , ? , DATE('now')) RETURNING order_id ",(customer_id_value[0][0], employee_id_value[0][0]) )
             order_id_value = cursor.fetchone()[0]
             cursor.execute(" INSERT INTO line_items (order_id, product_id, quantity) VALUES ( ? , ? , ? )", (order_id_value, product_id_value[0][0], 10))
@@ -79,8 +80,9 @@ try:
             cursor.execute(" INSERT INTO line_items (order_id, product_id, quantity) VALUES ( ? , ? , ? )", (order_id_value, product_id_value[4][0], 10))
             conn.commit()
 
+            # End transaction: order and all line_items committed together
         except sqlite3.Error as e:
-            conn.rollback()
+            conn.rollback() # # rolls back the order insert and any line_items already inserted above
             print("Transaction failed, rolled back:", e)
 
         query = """
@@ -88,7 +90,7 @@ try:
         FROM line_items AS li
         JOIN products AS p
             ON li.product_id = p.product_id
-        WHERE order_id = ? ;
+        WHERE li.order_id = ? ;
         """
         cursor.execute(query,(order_id_value,))
         print(cursor.fetchall())
