@@ -23,21 +23,17 @@ try:
 
         # Task 2: Understanding Subqueries
         query = """
-        WITH avg_price AS (
-            SELECT o.customer_id AS customer_id_b,
-                SUM (p.price * li.quantity) AS total_price
-            FROM orders AS o
-            JOIN line_items AS li
-                ON o.order_id = li.order_id
-            JOIN products AS p 
-                ON li.product_id = p.product_id
-            GROUP BY o.order_id,o.customer_id
-        )
         SELECT c.customer_name, 
-            AVG (ap.total_price) AS average_total_price
+            AVG(ap.total_price) AS average_total_price
         FROM customers AS c
-        LEFT JOIN avg_price AS ap
-            ON c.customer_id = ap.customer_id_b
+        LEFT JOIN (
+            SELECT o.customer_id AS customer_id_b,
+                SUM(p.price * li.quantity) AS total_price
+            FROM orders AS o
+            JOIN line_items AS li ON o.order_id = li.order_id
+            JOIN products AS p ON li.product_id = p.product_id
+            GROUP BY o.order_id, o.customer_id
+        ) AS ap ON c.customer_id = ap.customer_id_b
         GROUP BY c.customer_id;
 
         """
